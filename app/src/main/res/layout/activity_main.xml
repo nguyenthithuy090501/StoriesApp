@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".StoryActivity">
+
+    <RelativeLayout
+        android:id="@+id/LevelName"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#1F6BB8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBackTrangChu"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/btn_back" />
+
+        <TextView
+            android:id="@+id/txtlevelName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Selected Level Name"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="411dp"
+        android:layout_height="597dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtTimKiemTheoTen" />
+
+    <EditText
+        android:id="@+id/edtTimKiemTheoTen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Search...."
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LevelName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
