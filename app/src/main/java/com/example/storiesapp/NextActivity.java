@@ -49,7 +49,7 @@ public class NextActivity extends AppCompatActivity {
         String test2 = getIntent().getStringExtra("test2");
 
 
-        //Volume
+        //Text-to-Speech
         textToSpeech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
