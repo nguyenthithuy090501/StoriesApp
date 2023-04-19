@@ -24,6 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -34,8 +36,9 @@ public class QuizActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     MyStory myStory;
 
-
-
+    private Timer quizTimer;
+    private int totalTimeInMins = 1;
+    private int seconds = 0;
     private TextView questions;
     private TextView question;
     private Button option1, option2, option3, option4, btnNext;
@@ -81,6 +84,7 @@ public class QuizActivity extends AppCompatActivity {
         //get Level name and user name from TrangChu
         final String getSelectedLevelName = getIntent().getStringExtra("test2");
         selectedTopicName.setText(getSelectedLevelName);
+        startTimer(timer);
         databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://storiesapp-112b7-default-rtdb.firebaseio.com/");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -209,8 +213,8 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                //quizTimer.purge();
-                //quizTimer.cancel();
+                quizTimer.purge();
+                quizTimer.cancel();
 
                 startActivity(new Intent(QuizActivity.this, StoryActivity.class));
                 finish();
@@ -256,6 +260,52 @@ public class QuizActivity extends AppCompatActivity {
             finish();
         }
     }
+    private void startTimer (TextView timerTextView){
+        quizTimer = new Timer();
+        quizTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if(seconds == 0){
+                    totalTimeInMins--;
+                    seconds = 59;
+                } else if (seconds == 0 && totalTimeInMins == 0) {
+                    quizTimer.purge();
+                    quizTimer.cancel();
+
+                    Toast.makeText(QuizActivity.this, "Time Over", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(QuizActivity.this, QuizResults.class);
+                    intent.putExtra("correct",getCorrectAnswer());
+                    intent.putExtra("incorrect",getInCorrectAnswer());
+                    startActivity(intent);
+
+                    finish();
+
+                }
+                else{
+                    seconds--;
+                }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        String finalMinutes = String.valueOf(totalTimeInMins);
+                        String finalSeconds = String.valueOf(seconds);
+
+                        if(finalMinutes.length() == 1){
+                            finalMinutes = "0"+finalMinutes;
+                        }
+                        if(finalSeconds.length() == 1){
+                            finalSeconds = "0"+finalSeconds;
+                        }
+
+                        timerTextView.setText(finalMinutes + ":" + finalSeconds);
+                    }
+                });
+            }
+        },1000, 1000);
+    }
     private int getCorrectAnswer(){
         int correctAnswer = 0;
         for(int i = 0; i<questionsLists.size(); i++){
@@ -264,6 +314,7 @@ public class QuizActivity extends AppCompatActivity {
 
             if(getUserSelectedAnswer.equals(getAnswer)){
                 correctAnswer++;
+
             }
         }
         return correctAnswer;
@@ -275,6 +326,7 @@ public class QuizActivity extends AppCompatActivity {
             final String getAnswer = questionsLists.get(i).getAnswer();
             if(!getUserSelectedAnswer.equals(getAnswer)){
                 correctAnswer++;
+
             }
         }
         return correctAnswer;

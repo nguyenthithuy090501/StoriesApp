@@ -5,37 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
+    android:background="@drawable/backgroundnext_actitvity"
     tools:context=".NextActivity">
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="413dp"
         android:layout_height="541dp"
+        android:layout_marginTop="4dp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+
             android:id="@+id/nxt"
-            android:layout_width="wrap_content"
+            android:layout_width="390dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp" />
+            android:layout_marginTop="25dp"
+            android:background="@drawable/round_back_white_stoke10"
+            android:padding="10dp"
+            android:textSize="20sp"
+
+            />
     </ScrollView>
 
     <Button
         android:id="@+id/btnOnTap"
-        android:layout_width="0dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_back_green10"
         android:text="Review after learn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imgViewVolume"
@@ -46,5 +57,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2"
         app:srcCompat="@drawable/volume" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

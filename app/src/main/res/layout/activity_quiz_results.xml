@@ -65,4 +65,5 @@
         android:background="@drawable/round_back_green20"
         android:text="Start New Quiz"
         android:textColor="#fff" />
+
 </RelativeLayout>
