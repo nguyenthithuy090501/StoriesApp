@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class QuizResults extends AppCompatActivity {
     Button btnNewQuiz;
     TextView correctAnswer, incorrectAnswer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +19,7 @@ public class QuizResults extends AppCompatActivity {
         btnNewQuiz = findViewById(R.id.btnNewQuiz);
         correctAnswer = findViewById(R.id.correctAnswer);
         incorrectAnswer = findViewById(R.id.incorrectAnswer);
+
 
         final int getCorrectAnswer = getIntent().getIntExtra("correct", 0);
         final int getInCorrectAnswer = getIntent().getIntExtra("incorrect", 0);
