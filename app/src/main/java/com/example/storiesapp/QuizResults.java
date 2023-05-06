@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 public class QuizResults extends AppCompatActivity {
     Button btnNewQuiz;
-    TextView correctAnswer, incorrectAnswer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
