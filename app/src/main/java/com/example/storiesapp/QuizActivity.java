@@ -52,8 +52,6 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-       // setContentView(R.layout.demo_quiz_next);
-
         final ImageView btnBack = findViewById(R.id.btnBack);
         //final TextView timer = findViewById(R.id.timer);
         final TextView selectedTopicName = findViewById(R.id.topicName);

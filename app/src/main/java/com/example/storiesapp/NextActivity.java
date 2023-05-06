@@ -28,7 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 import java.util.Locale;
 
-public class NextActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
+public class NextActivity extends AppCompatActivity{
 
     TextView txt;
     Button btnOnTap;
@@ -40,17 +40,41 @@ public class NextActivity extends AppCompatActivity implements TextToSpeech.OnIn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.next_activity);
-
-
         txt = findViewById(R.id.nxt);
         btnOnTap =(Button) findViewById(R.id.btnOnTap);
         imgViewVolume = (ImageView) findViewById(R.id.imgViewVolume);
+
+
+        //String t = getIntent().getStringExtra("key");
+
         String t = getIntent().getStringExtra("key");
+
         txt.setText(t);
 
         String test1 = getIntent().getStringExtra("test1");
         String test2 = getIntent().getStringExtra("test2");
-        textToSpeech = new TextToSpeech( this, this);
+
+
+        //Text-to-Speech
+        textToSpeech=new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+                    textToSpeech.setLanguage(Locale.UK);
+                }
+            }
+        });
+
+        imgViewVolume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toSpeak = txt.getText().toString();
+                Toast.makeText(getApplicationContext(), toSpeak,Toast.LENGTH_SHORT).show();
+
+                textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+        //xet skien click
         btnOnTap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,69 +86,11 @@ public class NextActivity extends AppCompatActivity implements TextToSpeech.OnIn
         });
 
     }
-
-    @Override
-    public void onInit(int i) {
-        textToSpeech.setOnUtteranceProgressListener(new UtteranceProgressListener() {
-
-            //called when speaking starts
-            @Override
-            public void onStart(String utteranceId) {
-                Log.i("TTS", "utterance started");
-            }
-
-            //called when speaking is finished.
-            @Override
-            public void onDone(String utteranceId) {
-                Log.i("TTS", "utterance done");
-            }
-
-            //called when an error has occurred during processing.
-            @Override
-            public void onError(String utteranceId) {
-                Log.i("TTS", "utterance error");
-            }
-
-            //called when the TTS service is about to speak
-            //the specified range of the utterance with the given utteranceId.
-            @Override
-            public void onRangeStart(String utteranceId,
-                                     final int start,
-                                     final int end,
-                                     int frame) {
-                Log.i("TTS", "onRangeStart() ... utteranceId: " + utteranceId + ", start: " + start
-                        + ", end: " + end + ", frame: " + frame);
-
-
-                // onRangeStart (and all UtteranceProgressListener callbacks) do not run on main thread
-                // so we explicitly manipulate views on the main thread.
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        String t = txt.getText().toString();
-                        Spannable textWithHighlights = new SpannableString(t);
-                        textWithHighlights.setSpan(new ForegroundColorSpan(Color.RED), start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-                        txt.setText(textWithHighlights);
-
-                    }
-                });
-
-            }
-
-        });
-    }
-    public void startClicked(View ignored) {
-        String toSpeak = txt.getText().toString();
-        textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null, "UNIQUE_UTTERANCE_ID");
-
-    }
-    @Override
-    public void onDestroy() {
-        //don't forget to shutdown tts
-        if (textToSpeech != null) {
+    public void onPause(){
+        if(textToSpeech !=null){
             textToSpeech.stop();
             textToSpeech.shutdown();
         }
-        super.onDestroy();
+        super.onPause();
     }
 }
