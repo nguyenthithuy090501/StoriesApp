@@ -36,7 +36,6 @@ public class StoryActivity extends AppCompatActivity {
     MyStory myStory;
     TextView levelName;
     ImageView btnBack;
-    EditText edtTimKiem;
 
     String dem = "";
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
@@ -54,7 +53,6 @@ public class StoryActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, R.layout.demo, R.id.item_txt, title_lt);
         levelName = findViewById(R.id.txtlevelName);
         btnBack = findViewById(R.id.btnBackTrangChu);
-        edtTimKiem = findViewById(R.id.edtTimKiemTheoTen);
         //get Level name and user name from TrangChu
         final String getSelectedLevelName = getIntent().getStringExtra("selectedLevel");
         levelName.setText(getSelectedLevelName);
@@ -94,23 +92,6 @@ public class StoryActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        //tìm kiếm theo tên
-        edtTimKiem.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                StoryActivity.this.adapter.getFilter().filter(charSequence);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
 
             }
         });

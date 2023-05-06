@@ -17,16 +17,6 @@ public class QuizResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_results);
         btnNewQuiz = findViewById(R.id.btnNewQuiz);
-        correctAnswer = findViewById(R.id.correctAnswer);
-        incorrectAnswer = findViewById(R.id.incorrectAnswer);
-
-
-        final int getCorrectAnswer = getIntent().getIntExtra("correct", 0);
-        final int getInCorrectAnswer = getIntent().getIntExtra("incorrect", 0);
-
-        correctAnswer.setText(String.valueOf(getCorrectAnswer));
-        incorrectAnswer.setText(String.valueOf(getInCorrectAnswer));
-
         //xet su kien click
         btnNewQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
