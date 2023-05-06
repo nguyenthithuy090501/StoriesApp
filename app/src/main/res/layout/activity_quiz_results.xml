@@ -27,32 +27,18 @@
         android:text="You've successfully completed a quiz"
         android:layout_below="@+id/IconCongratulation"
         />
-    <LinearLayout
-        android:layout_below="@+id/txtCongrats"
-        android:layout_width="wrap_content"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/txtCongrath"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/correctAnswer"
-            android:textStyle="bold"
-            android:textColor="#00c853"
-            android:text="Correct Answer: 0"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/incorrectAnswer"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:textColor="#dd2c00"
-            android:text="InCorrect Answer: 0"
-            />
-    </LinearLayout>
-
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="Let's click button in below to start new quiz"
+        android:layout_below="@+id/txtCongrats"
+        />
     <Button
         android:id="@+id/btnNewQuiz"
         android:layout_width="match_parent"

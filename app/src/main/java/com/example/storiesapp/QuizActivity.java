@@ -55,7 +55,7 @@ public class QuizActivity extends AppCompatActivity {
        // setContentView(R.layout.demo_quiz_next);
 
         final ImageView btnBack = findViewById(R.id.btnBack);
-        final TextView timer = findViewById(R.id.timer);
+        //final TextView timer = findViewById(R.id.timer);
         final TextView selectedTopicName = findViewById(R.id.topicName);
 
         questions = findViewById(R.id.questions);
@@ -71,20 +71,10 @@ public class QuizActivity extends AppCompatActivity {
         String test1 = getIntent().getStringExtra("test1");
         //lên tên ứng với câu 1 trên firebase
         String test2 = getIntent().getStringExtra("test2");
-
-
-        //listView = findViewById(R.id.listViewTest);
-
-
-//        myStory = new MyStory();
-//        title_lt = new ArrayList<>();
-//        storylt = new ArrayList<>();
-//        adapter = new ArrayAdapter<>(this, R.layout.demo, R.id.item_txt, title_lt);
-
         //get Level name and user name from TrangChu
         final String getSelectedLevelName = getIntent().getStringExtra("test2");
         selectedTopicName.setText(getSelectedLevelName);
-        startTimer(timer);
+        //startTimer(timer);
         databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://storiesapp-112b7-default-rtdb.firebaseio.com/");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
